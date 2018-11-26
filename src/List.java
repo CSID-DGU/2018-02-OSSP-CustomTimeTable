@@ -1,7 +1,9 @@
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Vector;
-
+/*
+ * 읽어들여온 Course로 저장
+ */
 public class List {
 
 	public Vector<Subject> sbjStorage = new Vector<Subject>();

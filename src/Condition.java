@@ -14,16 +14,11 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class Condition extends JFrame {
-//시간표 생성전 선택할 조건을 구현
+/*
+ * 시간표 생성 조건
+ */
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-
-
-	/**
-	 * Create the frame.
-	 */
 	public Condition() {
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -59,7 +59,6 @@ MainFrame mFrame = null;
 	private final JLabel hour21 = new JLabel("   9");
 	
 	private final JButton crsButton = new JButton("만들기");
-//폰트와 컬러를 지정하는 부분
 
 	CardPanel card[] = new CardPanel[17];
 	int insNum = 0;

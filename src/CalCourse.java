@@ -1,9 +1,10 @@
 import java.util.Iterator;
 import java.util.TreeSet;
 import java.util.Vector;
-
 import javax.swing.JOptionPane;
-//시간표 생성 경우의 수 계산
+/*
+ * 시간표 생성 계산 부분
+ */
 public class CalCourse 
 {
 	public static final int BOOL_MAX = 141;  //197(7일)

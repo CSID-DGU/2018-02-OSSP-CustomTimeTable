@@ -1,5 +1,7 @@
 import java.util.Vector;
-
+/*
+ * 강의 정보를 저장
+ */
 public class Subject
 {
 	public Vector<Course> crsStorage = new Vector<Course>();

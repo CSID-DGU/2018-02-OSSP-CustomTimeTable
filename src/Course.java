@@ -1,6 +1,8 @@
 import java.util.Iterator;
 import java.util.Vector;
-//강의 정보를 가지고 있는 Course 객채
+/*
+ * 강의 정보를 저장
+ */
 interface Week
 {
 	int MON=0, TUE=1, WED=2, THU=3, FRI=4, SAT=5, SUN=6;

@@ -93,7 +93,7 @@ public class MainFrame extends JFrame {
 				dispose();
 			}
 		});
-		
+		//ㄴㅁㅇ
 		/************************************************************************************/
 		
 		JButton btnCondition = new JButton("Condition");
