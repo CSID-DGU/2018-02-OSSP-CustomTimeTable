@@ -1,6 +1,6 @@
 import java.util.Vector;
 /*
- * 강의 정보를 저장
+ * 강의 이름을 저장
  */
 public class Subject
 {
@@ -17,5 +17,5 @@ public class Subject
 	{
 		++cSum;
 		crsStorage.add(_c);
-	}//commit 확인
+	}
 }

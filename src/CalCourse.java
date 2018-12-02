@@ -27,7 +27,7 @@ public class CalCourse
 		int cal = 1;
 		int beforeCal = 1;
 		Iterator itr2 = calList.sbjStorage.iterator();
-		while(itr2.hasNext())
+		while(itr2.hasNext())//연산횟수를 체크
 		{
 			beforeCal = cal;
 			Subject sbj = (Subject) itr2.next();

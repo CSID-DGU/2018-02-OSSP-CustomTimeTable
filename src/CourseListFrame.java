@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -95,7 +97,27 @@ public class CourseListFrame extends JFrame {
 		});
 		
 		/*************************************************************/
-	}
+	
+		JButton btnCon = new JButton("Condition");
+		btnCon.setBounds(200,400 , 93, 23);
+		contentPane.add(btnCon);
+	
+		btnCon.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				Blank blank = new Blank(mframe.Clist);
+				
+				blank.setVisible(true);
+				blank.addWindowListener(new WindowAdapter() {
+					public void windowColsing(WindowEvent e) {
+					blank.setVisible(false);
+					blank.dispose();
+				}
+			});
+			}
+		});
+	}	
 }
 	
 

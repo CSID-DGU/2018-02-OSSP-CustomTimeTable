@@ -9,7 +9,7 @@ public class List {
 	public Vector<Subject> sbjStorage = new Vector<Subject>();
 	public static Scanner keyboard = new Scanner(System.in);
 	public int sSum=0;
-	public int cNum = 0;
+	public int cNum = 0; 
 	public List(Vector<Course> _crsList)
 	{
 		Iterator itr = _crsList.iterator();
@@ -21,8 +21,8 @@ public class List {
 	}
 	public void Add(Course _c)
 	{
-		Iterator titr = _c.timeStorage.iterator();
-		while(titr.hasNext())
+		Iterator titr = _c.timeStorage.iterator();//수업시간을 저장
+		while(titr.hasNext())//시간이 잘못 저장되어있는지 확인
 		{
 			Time t = (Time)titr.next();
 			if(t.sIndex>=t.eIndex||t.sIndex==0)
@@ -47,5 +47,6 @@ public class List {
 		_c.setNum(++cNum);
 		Subject newSbj = new Subject(_c);
 		sbjStorage.add(newSbj);
+		//중복된 강의는 빼고 저장시킨다.
 	}
 }
