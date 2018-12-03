@@ -97,7 +97,7 @@ public class CourseListFrame extends JFrame {
 		});
 		
 		/*************************************************************/
-	
+	/*
 		JButton btnCon = new JButton("Condition");
 		btnCon.setBounds(200,400 , 93, 23);
 		contentPane.add(btnCon);
@@ -117,6 +117,7 @@ public class CourseListFrame extends JFrame {
 			});
 			}
 		});
+		*/
 	}	
 }
 	

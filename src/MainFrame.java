@@ -19,6 +19,8 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
@@ -103,11 +105,18 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			Condition con = new Condition();
+			Condition con = new Condition(Clist);
 				con.setVisible(true);
-				dispose();
+				con.addWindowListener(new WindowAdapter() {
+					public void windowClosing(WindowEvent e) {
+						con.setVisible(false);
+						con.dispose();
+					}
+				});
+				//dispose();
 			}
 		});
+
 		/************************************************************************************/
 	}
 }

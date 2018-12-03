@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,8 +19,18 @@ public class Condition extends JFrame {
  * 시간표 생성 조건
  */
 	private JPanel contentPane;
+	public CourseList list = null;
+	public Vector<Time> timeStorage = new Vector<Time>();
+	
+	public JCheckBox checkBox;
+	public JCheckBox chckbxTue;
+	public JCheckBox chckbxWed;
+	public JCheckBox chckbxThu;
+	public JCheckBox chckbxFri;
 
-	public Condition() {
+	public Condition(CourseList _list) {
+		list = _list;
+		
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 574, 483);
@@ -58,21 +69,26 @@ public class Condition extends JFrame {
 		comboBox.setBounds(180, 40, 240, 21);
 		contentPane.add(comboBox);
 		
-		JCheckBox chckbxTue = new JCheckBox("Tue");
+		checkBox = new JCheckBox("Mon");
+		checkBox.setBounds(180, 75, 50, 20);
+		contentPane.add(checkBox);
+		
+		chckbxTue = new JCheckBox("Tue");
 		chckbxTue.setBounds(230, 75, 50, 20);
 		contentPane.add(chckbxTue);
 		
-		JCheckBox chckbxWed = new JCheckBox("Wed");
+		chckbxWed = new JCheckBox("Wed");
 		chckbxWed.setBounds(280, 75, 50, 20);
 		contentPane.add(chckbxWed);
 		
-		JCheckBox chckbxThu = new JCheckBox("Thu");
+		chckbxThu = new JCheckBox("Thu");
 		chckbxThu.setBounds(330, 75, 50, 20);
 		contentPane.add(chckbxThu);
 		
-		JCheckBox chckbxFri = new JCheckBox("Fri");
+		chckbxFri = new JCheckBox("Fri");
 		chckbxFri.setBounds(380, 75, 50, 20);
 		contentPane.add(chckbxFri);
+		
 		
 		String comboBox_arr1[] = {"1개","2개","3개","4개","5개"};
 		JComboBox comboBox_1 = new JComboBox(comboBox_arr1);
@@ -96,11 +112,10 @@ public class Condition extends JFrame {
 		radioButton_2.setBounds(340, 200, 121, 23);
 		contentPane.add(radioButton_2);
 		
-		JCheckBox checkBox = new JCheckBox("Mon");
-		checkBox.setBounds(180, 75, 50, 20);
-		contentPane.add(checkBox);
 		
-		JButton button = new JButton("\uC81C\uCD9C");
+		
+		JButton button = new JButton("\uC81C\uCD9C"); //제출 버튼
+		button.addActionListener(new submitEvent(list, this));
 		/*button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				first first_page = new first();				
@@ -119,4 +134,37 @@ public class Condition extends JFrame {
 	
 	}
 
+}
+
+
+class submitEvent implements ActionListener //제출 버튼 클릭시
+{
+	CourseList d_list = null;
+	Condition c_list = null;
+	
+	public submitEvent(CourseList _list, Condition _clist)
+	{
+		d_list = _list;
+		c_list = _clist;
+	}
+	
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		if(c_list.checkBox.isSelected()==true)
+			c_list.timeStorage.add(new Time(0, 0, 27)); //월요일 공강시간 적용
+		if(c_list.chckbxTue.isSelected()==true)
+			c_list.timeStorage.add(new Time(1, 0, 27)); //화요일 공강시간 적용
+		if(c_list.chckbxWed.isSelected()==true)
+			c_list.timeStorage.add(new Time(2, 0, 27)); //수요일 공강시간 적용
+		if(c_list.chckbxThu.isSelected()==true)
+			c_list.timeStorage.add(new Time(3, 0, 27)); //목요일 공강시간 적용
+		if(c_list.chckbxFri.isSelected()==true)
+			c_list.timeStorage.add(new Time(4, 0, 27)); //금요일 공강시간 적용
+		
+		d_list.blank.timeStorage = c_list.timeStorage; //공강시간 넘겨주기
+		
+		
+		c_list.dispose();
+	}
+	
 }
