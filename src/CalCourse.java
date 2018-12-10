@@ -1,13 +1,14 @@
 import java.util.Iterator;
+
 import java.util.TreeSet;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 /*
- * 시간표 생성 계산 부분
+ * 시간포 생성 계산 부분
  */
 public class CalCourse 
 {
-	public static final int BOOL_MAX = 141;  //197(7일)
+	public static final int BOOL_MAX = 141;  //셀 전체 개수 = 5일 * 28개의 셀 +1 여유공간
 
 	int m_weight = 1;
 
@@ -16,24 +17,26 @@ public class CalCourse
 	Boolean[] m_arr= new Boolean[BOOL_MAX];   
 	int calNum = 0;
 	public TreeSet<Instance> insStorage = new TreeSet<Instance>();
+	//Condition creditCondition = new Condition();
 	
-	CalCourse(Vector<Course> _crsList)
+	CalCourse(Vector<Course> _crsList) //생성자
 	{
 		calList = new List(_crsList);
 		execute = new int[calList.sSum];
 	}
+	
 	void CreateInstanceList(Course _crs)
 	{
 		int cal = 1;
 		int beforeCal = 1;
 		Iterator itr2 = calList.sbjStorage.iterator();
-		while(itr2.hasNext())//연산횟수를 체크
+		while(itr2.hasNext())
 		{
 			beforeCal = cal;
 			Subject sbj = (Subject) itr2.next();
 			cal *= (sbj.cSum+1);
 			if(cal<beforeCal){
-				if(JOptionPane.showConfirmDialog(null, "연산횟수를 초과합니다. 계속 진행하시겠습니까?\n(많은 시간이 소요될 수 있습니다. 문제가 발생하면 강제종료해주세요.)", "연산 시간", JOptionPane.WARNING_MESSAGE)==JOptionPane.OK_OPTION)
+				if(JOptionPane.showConfirmDialog(null, "연산횟수를 초과합니다. 계속 진행하시겠습니까?\\n(많은 시간이 소요될 수 있습니다. 문제가 발생하면 강제종료해주세요.)", "연산 시간", JOptionPane.WARNING_MESSAGE)==JOptionPane.OK_OPTION)
 					break;
 				else
 					return;
@@ -61,16 +64,18 @@ public class CalCourse
 	{   
 		ArrInit(_crs);  
 		Instance ins = new Instance(insStorage);
-		for(int i =0; i<calList.sSum; ++i)
+		for(int i =0; i<calList.sSum; ++i) //생성된 시간표 수만큼 반복
 		{
-			Course crs = calList.sbjStorage.elementAt(i).crsStorage.elementAt(execute[i]);
-			if(execute[i]>0&&TimeCal(crs))
-			{   
-				ins.m_creditSum += crs.credit;
-				ins.m_priorSum += crs.prior;
-				ins.m_key.add(crs.num);
-				++ins.m_subNum;
-			}
+			if(ins.m_creditSum + 3 <= _crs.max_credit) {
+				Course crs = calList.sbjStorage.elementAt(i).crsStorage.elementAt(execute[i]);
+				if(execute[i]>0 && TimeCal(crs))
+				{   
+					ins.m_creditSum += crs.credit; //선택된 수업의 학점을 시간표 총학점에 더하기
+					ins.m_priorSum += crs.prior; //선택된 수업의 우선도를 시간표 총우선도에 더하기
+					ins.m_key.add(crs.num); 
+					++ins.m_subNum;
+				}
+			}			
 		}
 		if(OverloadCheck(ins))
 		{
@@ -95,15 +100,19 @@ public class CalCourse
 		}
 	}
 	boolean TimeCal(Course _course)
-	{	int s;
+	{	
+		int s;
 		Iterator titr = _course.timeStorage.iterator();
 		for(int i = 0; i<_course.timeStorage.size(); ++i)
 		{
-			s = _course.timeStorage.elementAt(i).sIndex;
+			s = _course.timeStorage.elementAt(i).sIndex; //시작 시간
 			while(s<_course.timeStorage.elementAt(i).eIndex)
 			{	
 				if(m_arr[s]==false)
-				{	m_arr[s]=true;++s;}
+				{	
+					m_arr[s]=true;
+					++s;
+				}
 				else
 				{
 					--s;
@@ -121,8 +130,12 @@ public class CalCourse
 							{
 								m_arr[s]=false;
 								--s;
-			}}}return false;
-		}}}return true;
+							}
+						}
+					}return false;
+				}
+			}
+		}return true;
 	}		
 	boolean OverloadCheck(Instance _ins)
 	{   
@@ -167,7 +180,7 @@ class Instance implements Comparable<Instance>
 {
 	int m_creditSum=0;
 	int m_priorSum=0;
-	Vector<Integer> m_key = null;
+	Vector<Integer> m_key = null; 
 	public int m_subNum=0;
 	TreeSet<Instance> insStorage = null;
 	Instance(TreeSet<Instance> _insStorage)

@@ -93,6 +93,8 @@ public class CourseListFrame extends JFrame {
 					}
 					selec = list.getSelectedIndex();
 					mframe.Clist.crsStorage.remove(selec);
+					list.setVisible(false);
+					list.setVisible(true);
 				}
 		});
 		
