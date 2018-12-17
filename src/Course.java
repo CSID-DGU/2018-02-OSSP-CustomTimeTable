@@ -40,7 +40,14 @@ public class Course
 		str += credit+"점"; //학점 추가
 		for(int i = String.valueOf(credit).length(); i<3; ++i)
 			str +="　";
-		str += "중요도["+prior+"]"; //중요도 추가
+		if(prior == 0)
+		{
+			str += "기본"; //중요도 추가
+		}
+		else if(prior == 50)
+		{
+			str += "필수";
+		}
 		for(int i = String.valueOf(prior).length(); i<3; ++i)
 			str +="　";
 		

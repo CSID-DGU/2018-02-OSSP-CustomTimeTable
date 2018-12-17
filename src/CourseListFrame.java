@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -19,10 +21,12 @@ public class CourseListFrame extends JFrame {
 
 	private JPanel contentPane;
 	MainFrame mframe = null;
+	Course crs= new Course(); 
+	JList list = new JList();
 
 	public CourseListFrame(MainFrame mframe) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 647, 455);
+		setBounds(100, 100, 665, 495);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -32,13 +36,12 @@ public class CourseListFrame extends JFrame {
 		
 
 		//list형태로 출력
-		JList list = new JList();
 		list.setBounds(21, 20, 592, 341);
 		contentPane.add(list);
 		
 		list.setListData(mframe.Clist.crsStorage);
 		JButton btnCreate = new JButton("Create");
-		btnCreate.setBounds(404, 387, 93, 23);
+		btnCreate.setBounds(390, 382, 93, 23);
 		contentPane.add(btnCreate);
 		
 		btnCreate.addActionListener(new ActionListener() {
@@ -57,13 +60,38 @@ public class CourseListFrame extends JFrame {
 		
 			}
 		});
-		
+		list.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent evt) {
+		        JList list = (JList)evt.getSource();
+		        if (evt.getClickCount() == 2) {//더블클릭 하여 update 화면을 띄운다
+
+		            // Double-click detected
+		            int index = list.locationToIndex(evt.getPoint());//해당하는 list의 index저장
+		            crs = mframe.Clist.crsStorage.elementAt(index);//index에 해당하는 course 객체를 저장
+		          
+		            Update up = new Update(crs);
+		            
+					up.setVisible(true);//더블 클릭시 Update 화면으로 이동
+					up.addWindowListener(new WindowAdapter() {
+						public void windowClosing(WindowEvent e) {
+							up.setVisible(false);
+							up.dispose();
+						}
+					});
+		            
+		        } else if (evt.getClickCount() == 3) {
+
+		            // Triple-click detected
+		            int index = list.locationToIndex(evt.getPoint());
+		        }
+		    }
+		});
 		/*************************************************************/
 	
 		
 		/*************************************************************/
 		JButton btnNewButton = new JButton("Delete");
-		btnNewButton.setBounds(198, 387, 93, 23);
+		btnNewButton.setBounds(172, 382, 93, 23);
 		contentPane.add(btnNewButton);
 		
 		JScrollPane scrollPane = new JScrollPane(list);

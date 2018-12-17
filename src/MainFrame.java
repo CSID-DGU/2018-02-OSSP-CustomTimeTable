@@ -33,9 +33,14 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 import javax.swing.JList;
 import javax.swing.JTextPane;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class MainFrame extends JFrame {
 
@@ -52,12 +57,13 @@ public class MainFrame extends JFrame {
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		
 		/**************************************************************************************/
 		//엑셀을 읽어옴
-		JButton btnNewButton = new JButton("Excel");
+		JButton btnNewButton = new JButton("Start");
+		btnNewButton.setBackground(UIManager.getColor("Button.light"));
+		btnNewButton.setBounds(484, 225, 115, 37);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
@@ -75,32 +81,17 @@ public class MainFrame extends JFrame {
 			 
 			}
 		});
-		btnNewButton.setBounds(245, 10, 93, 23);
+		contentPane.setLayout(null);
 		contentPane.add(btnNewButton);
-		
-		
-		
-		/************************************************************************************/
-		
-		JButton btnCreate = new JButton("Create");
-		btnCreate.setBounds(404, 10, 93, 23);
-		contentPane.add(btnCreate);
-	
-		
-		btnCreate.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Ttable.setVisible(true);
-				dispose();
-			}
-		});
 	
 		/************************************************************************************/
 		
 		JButton btnCondition = new JButton("Condition");
-		btnCondition.setBounds(88, 10, 93, 23);
+		btnCondition.setBackground(UIManager.getColor("Button.light"));
+		btnCondition.setBounds(484, 103, 115, 37);
 		contentPane.add(btnCondition);
+		
+		
 		btnCondition.addActionListener(new ActionListener() {
 
 			@Override
@@ -118,5 +109,13 @@ public class MainFrame extends JFrame {
 		});
 
 		/************************************************************************************/
+		ImageIcon ic =new ImageIcon("./src/rCTT.png");
+		JLabel panel = new JLabel(ic);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(112, 103, 350, 150);
+		contentPane.add(panel);
+	
 	}
+	
+	
 }

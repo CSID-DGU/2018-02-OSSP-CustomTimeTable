@@ -15,6 +15,5 @@ public class MainApp {
 			}
 		});
 	}
-//커밋확인22
-	
+
 }
